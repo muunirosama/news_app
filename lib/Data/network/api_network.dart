@@ -66,11 +66,42 @@ abstract class AbiNetwork{
       throw Exception(error.toString());
     }
   }
+  static Future<List<Article>> searchArticle({
+    required String searchQuery,
+    required int pageNumber,
+  }) async {
+    try {
+      var queryParameters = {
+        "page": pageNumber.toString(),
+        "q": searchQuery,
+        "pageSize": "10",
+        "apiKey": Constants.apiKey
+      };
 
-    //  var data = await http.get(uri);
-    //   log(data.body as num);
-    // } catch(errors){
-    //   throw Exception(errors.toString());
-    // }
+      var uri = Uri.https(
+        Constants.baseURL,
+        Constants.everything,
+        queryParameters,
+
+      );
+      log("Final API URL: $uri");
+      var response = await http.get(uri);
+
+      log(response.request.toString());
+      log(response.body.toString());
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        ArticleModel articleModel = ArticleModel.fromJson(data);
+        return articleModel.articles ?? [];
+      } else {
+        log("Error: ${response.statusCode}");
+        return [];
+      }
+    } catch (error) {
+      log("Exception: $error");
+      return [];
+    }
+  }
   }
 

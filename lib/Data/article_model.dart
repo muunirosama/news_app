@@ -7,14 +7,12 @@ class ArticleModel {
     required this.articles,
   });
 
-  factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-    status: json["status"],
-    articles: List.from(json["articles"])
-        .map(
-          (element) => Article.fromJson(element),
-    )
-        .toList(),
-  );
+  factory ArticleModel.fromJson(Map<String, dynamic> json) {
+    return ArticleModel(
+      status: json["status"] ?? "unknown",
+      articles: (json["articles"] as List?)?.map((element) => Article.fromJson(element)).toList() ?? [],
+    );
+  }
 }
 
 class Article {
@@ -36,21 +34,22 @@ class Article {
     required this.description,
     required this.url,
     required this.urlToImage,
-    required this.publishedAt ,
+    required this.publishedAt,
     required this.content,
   });
 
   factory Article.fromJson(Map<String, dynamic> json) {
+    var source = json["source"] ?? {};
     return Article(
-      id: json["source"]["id"],
-      name: json["source"]["name"],
-      author: json["author"] ?? "",
-      title: json["title"],
-      description: json["description"],
-      url: json["url"],
-      urlToImage: json["urlToImage"],
-      publishedAt: json["publishedAt"],
-      content: json["content"],
+      id: source["id"] ?? "noID",
+      name: source["name"] ?? "No name",
+      author: json["author"] ?? "Unknown Author",
+      title: json["title"] ?? "No title",
+      description: json["description"] ?? "No description",
+      url: json["url"] ?? "",
+      urlToImage: json["urlToImage"] ?? "",
+      publishedAt: json["publishedAt"] ?? "Unknown date",
+      content: json["content"] ?? "No content available",
     );
   }
 }

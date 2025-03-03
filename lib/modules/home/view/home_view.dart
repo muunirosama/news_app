@@ -25,14 +25,12 @@ class _HomeViewState extends State<HomeView> {
     var theme= Theme.of(context);
     var provider= Provider.of<HomeViewModel>(context);
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //     onPressed: (){
-      //       AbiNetwork.getAllSources("sports");
-      // }
-      // ),
       appBar:AppBar(
         title: Text(
-          provider.selectedCategory==null? "Home": provider.selectedCategory!.categoryID
+          provider.selectedCategory==null? "Home": provider.selectedCategory!.categoryID,
+          style: TextStyle(
+            color: Colors.black
+          ),
         ),
           actions: [
             GestureDetector(
@@ -43,15 +41,16 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 );
               },
-              child: const Icon(
+              child: Icon(
                   Icons.search,
                 size: 30,
+                color: Colors.black,
               ).setHorizontalPadding(context,0.04),
             )
           ],
+        backgroundColor: Colors.white,
       ),
-        drawer: DrawerWidget(),
-
+        drawer:DrawerWidget(),
         body: provider.selectedCategory==null
             ? CategoryHomeView(
           categoriesList:provider.categoriesList,
