@@ -204,7 +204,7 @@ class _SearchPageState extends State<SearchPage> {
                   } else {
                     print("Invalid article index");
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Article not found!")),
+                      const SnackBar(content: Text("Article not found!")),
                     );
                   }
                 },
