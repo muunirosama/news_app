@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/cores/extensions/Padding.dart';
 import 'package:provider/provider.dart';
-
-
 import '../../../../Data/category_model.dart';
 import '../../view_model/home_view_model.dart';
 
@@ -36,8 +34,10 @@ class CategoryHomeView extends StatelessWidget {
 
           ListView.separated(
             shrinkWrap: true,
+            padding: EdgeInsets.only(bottom: 20),
             physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context,index)=> Stack(
+            itemBuilder: (context,index)=>
+                Stack(
                 alignment: index % 2 == 0? Alignment.bottomRight: Alignment.bottomLeft,
                 children: [
                   Image.asset(
@@ -82,7 +82,7 @@ class CategoryHomeView extends StatelessWidget {
                     ),
                   ),
                 ]
-            ),
+                ),
             separatorBuilder: (context,index)=>SizedBox(height: 10,),
             itemCount: categoriesList.length,
           )
