@@ -19,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
       const Duration(seconds: 2),
         (){
           navigatorKey.currentState?.pushNamedAndRemoveUntil(
-              PagesRouteName.home,
+              PagesRouteName.signIn,
               (route)=> false,
           );
         }

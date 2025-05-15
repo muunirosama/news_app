@@ -74,7 +74,7 @@ class DrawerWidget extends StatelessWidget {
              Icon(
               Icons.wb_sunny_outlined,
               size: 28,
-              color: ColorPalette.white,
+              color: Colors.white,
             ),
             Text("Theme",
               style: TextStyle(
