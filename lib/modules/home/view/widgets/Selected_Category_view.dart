@@ -166,49 +166,53 @@ class _SelectedCategoryViewState extends State<SelectedCategoryView> {
       ],
     );
   }
-  void _showArticleDetailsBottomSheet(BuildContext context,index){
+  void _showArticleDetailsBottomSheet(BuildContext context, int index) {
     showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        isScrollControlled: true,
-        isDismissible: true,
-        builder: (context)=> Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              margin: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-
-              child: FilledButton(
-                  onPressed: (){
-                    print("object");
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16),
+            margin: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                FilledButton(
+                  onPressed: () {
+                    Navigator.pop(context);
                     launchUrl(
                       Uri.parse(_viewModel.articlesList[index].url ?? ""),
                       mode: LaunchMode.inAppBrowserView,
                     );
                   },
                   style: FilledButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                      )
-                  ) ,
-                  child: const Text(
-                    "View Full Article",
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    textStyle: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
                   ),
-              ),
+                  child: Text("View Full Article"),
+                ),
+                SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Close", style: TextStyle(color: Colors.grey)),
+                ),
+              ],
             ),
-          ],
-        )
+          ),
+        ],
+      ),
     );
   }
 }
